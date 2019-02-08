@@ -11,58 +11,49 @@ r = sr.Recognizer()
 eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 i = 0
 
+# values for point of ref
+# ex 344
+# ey 229
+#
 # Previous position holder
-prevx = 0
-prevy = 0
+prevx = 344
+prevy = 229
 diffx = 0
 diffy = 0
-# def capture_voice():
-#     while True:
-#         with mic as source:
-#             audio = r.listen(source)
-#         try:
-#             if r.recognize_sphinx(audio) == 'twenty':
-#                 mouse.click(Button.left, 1)
-        
-#         except LookupError:
-#             print("Could not understand audio")
+
 
 while True:
     # Initialize the stream and settings
     ret, img = cap.read()
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    
-    # Begin new thread
-    # if i > 150:
-    #     thread.start_new_thread( capture_voice, ( ))
-    #     i = 0
-    # i += 1
-    # print(i)
+   
     # Eye Detection
     eyes = eye_cascade.detectMultiScale(gray, 1.3, 5)
     for (ex,ey,ew,eh) in eyes:
-        # print(prevx)
-        # print(prevy)
+    
         diffx = prevx - ex
         diffy = prevy - ey 
-        prevx = ex
-        prevy = ey
+    
+        print("diffx",diffx)
+        print("diffy",diffy)
+        
 
-        if diffx > 5 and diffx < 60:
+
+        if diffx > 50 and diffx < 100:
             # print(diffx)
-            mouse.move(diffx + 10, 0)
-        if diffx < -5 and diffx > -60:
+            mouse.move(-10, 0)
+        if diffx < -50 and diffx > -100:
             # print(diffx)
-            mouse.move(diffx - 10 , 0)
-        if diffy > 5  and diffy < 60:   
+            mouse.move(10 , 0)
+        if diffy > 50  and diffy < 100:   
             # print(diffy)
-            mouse.move(0 , (diffy + 10) * -1)
-        if diffy < -5  and diffy > -60:   
+            mouse.move(0 , -10 )
+        if diffy < -50  and diffy > -100:   
             # print(diffy)
-            mouse.move(0 , (diffy - 10) * -1)
-        else:
-            print(diffy)
+            mouse.move(0 , 10)
         cv2.rectangle(img, (ex,ey), (ex+ew, ey+eh), (0,255,0) ,2)
+    # cv2.circle(img, (prevx,prevy), 100, color[, thickness[, lineType[, shift]]])
+    cv2.rectangle(img, (prevx -50,prevy - 50), (prevx+100, prevy+100), (0,255,0) ,2)
     
     # Right Eye Detection
     # reyes = right_eye_cascade.detectMultiScale(gray, 1.3, 5)
