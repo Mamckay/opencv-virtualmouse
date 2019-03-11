@@ -44,15 +44,13 @@ while True:
                 tick = 0
         print(diff)
         tick += 1
-        # print(mouse.position[y])
-        # print(mouse.position[x])
 
-        # smiles = smile_cascade.detectMultiScale(roi_gray)
-        # for (ax,ay,aw,ah) in smiles:
-        #     cv2.rectangle(roi_color,(ax,ay), (ax+aw, ay+ah), (0,0,255) ,2)
-        # eyes = eye_cascade.detectMultiScale(roi_gray)
-        # for (ex,ey,ew,eh) in eyes:
-        #     cv2.rectangle(roi_color, (ex,ey), (ex+ew, ey+eh), (0,255,0) ,2)
+        smiles = smile_cascade.detectMultiScale(roi_gray)
+        for (ax,ay,aw,ah) in smiles:
+            cv2.rectangle(roi_color,(ax,ay), (ax+aw, ay+ah), (0,0,255) ,2)
+        eyes = eye_cascade.detectMultiScale(roi_gray)
+        for (ex,ey,ew,eh) in eyes:
+            cv2.rectangle(roi_color, (ex,ey), (ex+ew, ey+eh), (0,255,0) ,2)
     
     # Eye Detection
     # eyes = eye_cascade.detectMultiScale(gray, 1.3, 5)

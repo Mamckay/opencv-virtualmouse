@@ -16,8 +16,8 @@ i = 0
 # ey 229
 #
 # Previous position holder
-prevx = 344
-prevy = 229
+prevx = 300
+prevy = 200
 diffx = 0
 diffy = 0
 
@@ -41,19 +41,19 @@ while True:
 
         if diffx > 50 and diffx < 100:
             # print(diffx)
-            mouse.move(-10, 0)
+            mouse.move(15, 0)
         if diffx < -50 and diffx > -100:
             # print(diffx)
-            mouse.move(10 , 0)
-        if diffy > 50  and diffy < 100:   
-            # print(diffy)
+            mouse.move(-15 , 0)
+        if diffy > 20  and diffy < 100:   
+            print(diffy)
             mouse.move(0 , -10 )
-        if diffy < -50  and diffy > -100:   
-            # print(diffy)
+        if diffy < -20  and diffy > -100:   
+            print(diffy)
             mouse.move(0 , 10)
         cv2.rectangle(img, (ex,ey), (ex+ew, ey+eh), (0,255,0) ,2)
     # cv2.circle(img, (prevx,prevy), 100, color[, thickness[, lineType[, shift]]])
-    cv2.rectangle(img, (prevx -50,prevy - 50), (prevx+100, prevy+100), (0,255,0) ,2)
+    cv2.rectangle(img, (prevx -25,prevy - 15), (prevx + 25, prevy + 15), (0,255,0) ,2)
     
     # Right Eye Detection
     # reyes = right_eye_cascade.detectMultiScale(gray, 1.3, 5)
@@ -66,7 +66,6 @@ while True:
     # for (ex,ey,ew,eh) in leyes:
     #     mouse.move(-5,0)
     #     cv2.rectangle(img, (ex,ey), (ex+ew, ey+eh), (0,255,255) ,2)
-
 
     cv2.imshow('img',img)
     k = cv2.waitKey(30) & 0xff
